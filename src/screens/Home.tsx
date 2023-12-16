@@ -1,13 +1,8 @@
 import {
-  ScrollView,
   Box,
   Text,
-  HStack,
-  Button,
-  FlatList,
 } from "@gluestack-ui/themed";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
 import { HeaderHome } from "../components/HeaderHome";
 import { PlayerBottom } from "../components/PlayerBottom";
 import { musics } from "../utils/data";
@@ -29,8 +24,6 @@ interface Items {
 const { width: screenWidth } = Dimensions.get("window");
 
 export function Home() {
-  console.log(screenWidth);
-  
 
   return (
     <LinearGradient
@@ -42,20 +35,29 @@ export function Home() {
     >
       <HeaderHome />
 
-      <Carousel
-        data={musics}
-        centerContent={false}
-        sliderWidth={screenWidth / 2}
-        itemWidth={screenWidth / 2}
-        renderItem={({ item }: Items) => (
-          <Box key={item.id}>
-            <Image alt="Background" w={183} h={183} source={item.url} />
-            <Text>{item.name}</Text>
-            <Text>{item.author}</Text>
-          </Box>
-        )}
-      />
+      <Box>
+        <Carousel 
+          activeSlideAlignment="start"
+          data={musics}
+          sliderWidth={screenWidth}
+          itemWidth={screenWidth / 1.8}
+          renderItem={({ item }: Items) => (
+            <Box px={20} key={item.id}>
+              <Image alt="Background" w={200} h={200} style={{ borderRadius: 10 }} source={item.url} />
 
+              <Text 
+                color="$white" 
+                fontWeight="$bold" 
+                size="lg"
+              >
+                {item.name}
+              </Text>
+              <Text my={5} color="#D1D5DB">{item.author}</Text>
+            </Box>
+          )}
+        />
+      </Box>
+      
       <PlayerBottom />
     </LinearGradient>
   );
