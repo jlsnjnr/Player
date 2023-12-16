@@ -1,6 +1,5 @@
-import { ScrollView, Box, Text, HStack, Button } from "@gluestack-ui/themed";
+import { Box, Text, HStack, Button } from "@gluestack-ui/themed";
 import { useState } from "react";
-import { HeaderHome } from "../components/HeaderHome";
 import { Pause, Play } from "phosphor-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -37,9 +36,9 @@ export function PlayerBottom() {
         />
       </Box>
       <HStack p={20} alignItems="center" justifyContent="space-between">
-        <HStack gap={12}>
+        <HStack>
           <Box w={48} h={48} bg="$amber500" rounded={10} />
-          <Box>
+          <Box ml={20}>
             <Text
               size="md"
               color="$white"

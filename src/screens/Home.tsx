@@ -29,6 +29,9 @@ interface Items {
 const { width: screenWidth } = Dimensions.get("window");
 
 export function Home() {
+  console.log(screenWidth);
+  
+
   return (
     <LinearGradient
       colors={["#0A2677", "#0B1226"]}
@@ -39,23 +42,19 @@ export function Home() {
     >
       <HeaderHome />
 
-      <Box ml={20}>
-        <Carousel
-          data={musics}
-          renderItem={({ item }: Items) => (
-            <Box key={item.id}>
-              <Text>{item.name}</Text>
-              <Text>{item.author}</Text>
-              <Image alt="Background" w={183} h={183} source={item.url} />
-
-              <Text>{item.isActive}</Text>
-              <Text>{item.liked}</Text>
-            </Box>
-          )}
-          sliderWidth={screenWidth}
-          itemWidth={screenWidth / 0.5}
-        />
-      </Box>
+      <Carousel
+        data={musics}
+        centerContent={false}
+        sliderWidth={screenWidth / 2}
+        itemWidth={screenWidth / 2}
+        renderItem={({ item }: Items) => (
+          <Box key={item.id}>
+            <Image alt="Background" w={183} h={183} source={item.url} />
+            <Text>{item.name}</Text>
+            <Text>{item.author}</Text>
+          </Box>
+        )}
+      />
 
       <PlayerBottom />
     </LinearGradient>

@@ -17,7 +17,6 @@ export function BottomInicial() {
       justifyContent="center"
       borderTopRightRadius={45}
       borderTopLeftRadius={45}
-      gap="$1/5"
       paddingHorizontal="$10"
     >
       <Text
@@ -44,13 +43,15 @@ export function BottomInicial() {
         height="$12"
         rounded="$full"
         backgroundColor="#F5C346"
-        gap="$1.5"
         onPress={() => navigator.navigate("Home")}
+        alignItems="center"
+        justifyContent="center"
       >
         <ButtonText
           size="xl"
           fontFamily="SourceSansPro_600SemiBold"
           color="$white"
+          marginRight={10}
         >
           Começar
         </ButtonText>
