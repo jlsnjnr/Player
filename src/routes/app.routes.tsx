@@ -1,7 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
+import React from "react"
+
 import { Onboarding } from "../screens/Onboarding";
 import { Home } from "../screens/Home";
+import { Music } from "../screens/Music";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +19,7 @@ export function AppRoutes({}) {
       />
 
       <Stack.Screen name="Home" options={options} component={Home} />
+      <Stack.Screen name="Music" options={options} component={Music} />
     </Stack.Navigator>
   );
 }
