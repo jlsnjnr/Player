@@ -1,4 +1,4 @@
-import { Box, Text, HStack, Button } from "@gluestack-ui/themed";
+import { Box, Text, HStack, Button, Image } from "@gluestack-ui/themed";
 import { useState } from "react";
 import { Pause, Play } from "phosphor-react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -35,9 +35,18 @@ export function PlayerBottom() {
           zIndex={999}
         />
       </Box>
-      <HStack p={20} alignItems="center" justifyContent="space-between">
-        <HStack>
-          <Box w={48} h={48} bg="$amber500" rounded={10} />
+      <HStack px={20} py={10} alignItems="center" justifyContent="space-between">
+
+        <HStack alignItems="center">
+          <Box w={60} h={60}>
+            <Image 
+              alt="Background" 
+              w={60}
+              h={60}
+              source={require("./../assets/hogwarts.png")} 
+            />
+          </Box>
+
           <Box ml={20}>
             <Text
               size="md"

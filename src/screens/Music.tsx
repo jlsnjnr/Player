@@ -22,7 +22,7 @@ interface Items {
   
 
 export function Music() {
-    const { navigate } = useNavigation<NavigationProps>();
+    const { navigate, goBack } = useNavigation<NavigationProps>();
     const { width: screenWidth } = Dimensions.get("window");
 
     return (
@@ -40,7 +40,9 @@ export function Music() {
                     flexDirection="row"
                     p={20}
                 >
-                    <ArrowLeft color="white" />
+                    <TouchableOpacity onPress={() => goBack()}>
+                        <ArrowLeft color="white" />
+                    </TouchableOpacity>
                     <Text fontFamily="SourceSansPro_700Bold" color="$white" size="2xl">Tocando agora</Text>
                     <SpeakerLow color="white" />
                 </Box>
@@ -51,7 +53,7 @@ export function Music() {
                     activeSlideAlignment="start"
                     data={musics}
                     sliderWidth={screenWidth}
-                    itemWidth={screenWidth / 1.2}
+                    itemWidth={screenWidth / 1.14}
                     renderItem={({ item }: Items) => (
                         <Box w={"100%"} px={20} key={item.id}>
                             <Image alt="Background" w={"100%"} h={350} style={{ borderRadius: 10 }} source={item.url} />
@@ -74,12 +76,51 @@ export function Music() {
                     <Heart size={30} color="white" />
                 </HStack>
 
-                <HStack my={20} px={20} justifyContent="space-between" alignItems="center">
+                <HStack mx={20} alignItems="center" justifyContent="space-between" py={10}>
+                    <Text color="$white">00:34</Text>
+                    <Text color="$white">04:11</Text>
+                </HStack>
+
+                <Box mx={20}>
+                    <Box h={4} mr={20} w={"$full"} bg="#374151" mt={3}>
+                        <Box
+                            w={120}
+                            h={4}
+                            rounded="$full"
+                            bg="#F5C346"
+                            position="relative"
+                            alignItems="center"
+                            justifyContent="center"
+                            zIndex={999}
+                        />
+                        <Box
+                            w={8}
+                            h={8}
+                            rounded="$full"
+                            bg="$white"
+                            position="relative"
+                            right={-3}
+                            ml={110}
+                            bottom={6}
+                            alignItems="center"
+                            justifyContent="center"
+                            zIndex={999}
+                        />
+                    </Box>
+                </Box>
+
+                <HStack  my={20} px={20} justifyContent="space-between" alignItems="center">
                     <TouchableOpacity><Repeat size={30} color="white" /></TouchableOpacity>
-                    <HStack>
-                        <TouchableOpacity><SkipBack size={30} color="white" /></TouchableOpacity>
-                        <TouchableOpacity><Play size={30} color="white" /></TouchableOpacity>
-                        <TouchableOpacity><SkipForward size={30} color="white" /></TouchableOpacity>
+                    <HStack gap={20} alignItems="center">
+                        <TouchableOpacity><SkipBack weight="fill" size={30} color="white" /></TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Box rounded={"$full"} alignItems="center" justifyContent="center" w={48} h={48} bg="#F5C346">
+                                <Play weight="fill" size={22} color="#0B142F" />
+                            </Box>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity><SkipForward weight="fill" size={30} color="white" /></TouchableOpacity>
                     </HStack>
                     <TouchableOpacity>
                         <Shuffle size={30} color="white" />
