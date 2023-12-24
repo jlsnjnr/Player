@@ -1,11 +1,21 @@
 import { Box, Text, HStack, Button, Image } from "@gluestack-ui/themed";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pause, Play } from "phosphor-react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Audio } from 'expo-av';
 
 export function PlayerBottom() {
-  const [play, setPlay] = useState(false);
+  const [sound, setSound] = useState<any>();
+  
+  async function playPauseSound() {
+    const { sound, status } = await Audio.Sound.createAsync(require('./../songs/good-night.mp3'));
 
+    console.log(status);
+    
+    await sound.playAsync();
+    setSound(sound);
+  }
+  
   return (
     <LinearGradient
       colors={["rgba(10, 38, 119, 0)", "#121C39"]}
@@ -72,12 +82,12 @@ export function PlayerBottom() {
           bg="#F5C346"
           alignItems="center"
           justifyContent="center"
-          onPress={() => setPlay(!play)}
+          onPress={playPauseSound}
         >
-          {play ? (
-            <Play size={24} weight="fill" />
-          ) : (
+          {sound && sound.isPlaying ? (
             <Pause size={24} weight="fill" />
+          ) : (
+            <Play size={24} weight="fill" />
           )}
         </Button>
       </HStack>

@@ -8,6 +8,8 @@ import { musics } from "../utils/data";
 import { Dimensions, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../@types/types";
+import { useState } from "react";
+import { HeaderMusicSingle } from "../components/HeaderMusicSingle";
 
 interface Items {
     item: {
@@ -22,6 +24,11 @@ interface Items {
   
 
 export function Music() {
+    const [currrentSong, setCurrentSong] = useState({
+        name: "Overture To The Unwritten",
+        author: "Hogwarts Legacy",
+        isLiked: false
+    });
     const { navigate, goBack } = useNavigation<NavigationProps>();
     const { width: screenWidth } = Dimensions.get("window");
 
@@ -33,20 +40,7 @@ export function Music() {
                 height: "100%",
             }}
         >
-            <SafeAreaView>
-                <Box
-                    alignItems="center"
-                    justifyContent="space-between"
-                    flexDirection="row"
-                    p={20}
-                >
-                    <TouchableOpacity onPress={() => goBack()}>
-                        <ArrowLeft color="white" />
-                    </TouchableOpacity>
-                    <Text fontFamily="SourceSansPro_700Bold" color="$white" size="2xl">Tocando agora</Text>
-                    <SpeakerLow color="white" />
-                </Box>
-            </SafeAreaView>
+            <HeaderMusicSingle />
 
             <Box py={40}>
                 <Carousel
@@ -59,6 +53,7 @@ export function Music() {
                             <Image alt="Background" w={"100%"} h={350} style={{ borderRadius: 10 }} source={item.url} />
                         </Box>
                     )}
+                    onResponderTerminate={() => console.log("aqui")}
                 />
 
                 <HStack my={20} px={20} justifyContent="space-between" alignItems="center">
@@ -69,13 +64,14 @@ export function Music() {
                             size="3xl"
                             maxWidth={300}
                         >
-                            Overture To The Unwritten
+                            {currrentSong.name}
                         </Text>
-                        <Text my={5} color="#D1D5DB">Hogwarts Legacy</Text>
+                        <Text my={5} color="#D1D5DB">{currrentSong.author}</Text>
                     </Box>
                     <Heart size={30} color="white" />
                 </HStack>
-
+                
+                {/* player */}
                 <HStack mx={20} alignItems="center" justifyContent="space-between" py={10}>
                     <Text color="$white">00:34</Text>
                     <Text color="$white">04:11</Text>
@@ -108,7 +104,8 @@ export function Music() {
                         />
                     </Box>
                 </Box>
-
+                
+                {/* controls */}
                 <HStack  my={20} px={20} justifyContent="space-between" alignItems="center">
                     <TouchableOpacity><Repeat size={30} color="white" /></TouchableOpacity>
                     <HStack gap={20} alignItems="center">

@@ -30,23 +30,7 @@ export const musics = [
     isActive: false,
     liked: false,
     id: 4,
-  },
-  {
-    name: "Sunflower",
-    author: "Homem aranha- Aranhav...",
-    url: require("./../assets/homem-aranha.png"),
-    isActive: false,
-    liked: false,
-    id: 5,
-  },
-  {
-    name: "Heathens",
-    author: "Suicide Squad",
-    url: require("./../assets/suicide-squad.png"),
-    isActive: false,
-    liked: false,
-    id: 6,
-  },
+  }
 ]
 
 export const musicsLiked = [
