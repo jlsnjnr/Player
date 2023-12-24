@@ -6,15 +6,31 @@ import { Audio } from 'expo-av';
 
 export function PlayerBottom() {
   const [sound, setSound] = useState<any>();
-  
-  async function playPauseSound() {
-    const { sound, status } = await Audio.Sound.createAsync(require('./../songs/good-night.mp3'));
+  const [status, setStatus] = useState<any>(false);
 
-    console.log(status);
-    
+  async function playPauseSound() {
+    const { sound } = await Audio.Sound.createAsync(require('./../songs/good-night.mp3'));
     await sound.playAsync();
     setSound(sound);
   }
+  
+  const PauseAudio = async () => { 
+    try { 
+      const result = await sound.pauseAsync() ;
+      setStatus(true);
+    } 
+    catch (error) {} 
+  };
+
+  const PlayAsync = async () => { 
+    try { 
+      const result = await sound.playAsync(); 
+      setStatus(false);
+    } 
+    catch (error) {} 
+  };
+
+  console.log(status);
   
   return (
     <LinearGradient
@@ -82,15 +98,25 @@ export function PlayerBottom() {
           bg="#F5C346"
           alignItems="center"
           justifyContent="center"
-          onPress={playPauseSound}
+          onPress={() => {
+            if (!sound) {
+              playPauseSound();
+            } else if (!status) {
+              PauseAudio();
+            } else if (status) {
+              PlayAsync();
+            }
+          }}
         >
-          {sound && sound.isPlaying ? (
+          {!status ? (
             <Pause size={24} weight="fill" />
           ) : (
             <Play size={24} weight="fill" />
           )}
         </Button>
+
       </HStack>
+
     </LinearGradient>
   );
 }
