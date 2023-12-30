@@ -6,32 +6,31 @@ import { Audio } from 'expo-av';
 
 export function PlayerBottom() {
   const [sound, setSound] = useState<any>();
-  const [status, setStatus] = useState<any>(false);
+  const [status, setStatus] = useState<any>(null);
 
   async function playPauseSound() {
     const { sound } = await Audio.Sound.createAsync(require('./../songs/good-night.mp3'));
     await sound.playAsync();
+    setStatus(false);
     setSound(sound);
   }
-  
-  const PauseAudio = async () => { 
-    try { 
-      const result = await sound.pauseAsync() ;
+
+  const PauseAudio = async () => {
+    try {
+      const result = await sound.pauseAsync();
       setStatus(true);
-    } 
-    catch (error) {} 
+    }
+    catch (error) { }
   };
 
-  const PlayAsync = async () => { 
-    try { 
-      const result = await sound.playAsync(); 
+  const PlayAsync = async () => {
+    try {
+      const result = await sound.playAsync();
       setStatus(false);
-    } 
-    catch (error) {} 
+    }
+    catch (error) { }
   };
 
-  console.log(status);
-  
   return (
     <LinearGradient
       colors={["rgba(10, 38, 119, 0)", "#121C39"]}
@@ -65,11 +64,11 @@ export function PlayerBottom() {
 
         <HStack alignItems="center">
           <Box w={60} h={60}>
-            <Image 
-              alt="Background" 
+            <Image
+              alt="Background"
               w={60}
               h={60}
-              source={require("./../assets/hogwarts.png")} 
+              source={require("./../assets/hogwarts.png")}
             />
           </Box>
 
@@ -99,24 +98,19 @@ export function PlayerBottom() {
           alignItems="center"
           justifyContent="center"
           onPress={() => {
-            if (!sound) {
+            if (sound === undefined) {
               playPauseSound();
-            } else if (!status) {
+            }
+            if (status === false) {
               PauseAudio();
-            } else if (status) {
+            } else {
               PlayAsync();
             }
           }}
         >
-          {!status ? (
-            <Pause size={24} weight="fill" />
-          ) : (
-            <Play size={24} weight="fill" />
-          )}
+          {sound === undefined && <Play size={24} weight="fill" /> || status === false && <Pause size={24} weight="fill" /> || status && <Play size={24} weight="fill" />}
         </Button>
-
       </HStack>
-
     </LinearGradient>
   );
 }
