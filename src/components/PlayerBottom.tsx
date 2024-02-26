@@ -1,5 +1,5 @@
 import { Box, Text, HStack, Button, Image } from "@gluestack-ui/themed";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pause, Play } from "phosphor-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Audio } from 'expo-av';
@@ -10,10 +10,11 @@ export function PlayerBottom() {
 
   async function playPauseSound() {
     const { sound } = await Audio.Sound.createAsync(require('./../songs/good-night.mp3'));
+
     await sound.playAsync();
     setStatus(false);
     setSound(sound);
-  }
+  } 
 
   const PauseAudio = async () => {
     try {
@@ -114,3 +115,8 @@ export function PlayerBottom() {
     </LinearGradient>
   );
 }
+
+
+{/*
+
+*/}

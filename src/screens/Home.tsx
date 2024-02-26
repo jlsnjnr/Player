@@ -60,7 +60,6 @@ export function Home() {
                 <Text my={5} color="#D1D5DB">{item.author}</Text>
               </Box>
             </TouchableOpacity>
-
           )}
         />
       </Box>

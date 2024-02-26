@@ -9,7 +9,7 @@ export function BottomInicial() {
   return (
     <VStack
       bg="$white"
-      position="absolute"
+      position="absolut"
       width="$full"
       height={250}
       bottom="$0"

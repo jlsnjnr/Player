@@ -1,8 +1,7 @@
 import { HStack, Image, Text } from "@gluestack-ui/themed";
 import { Box } from "@gluestack-ui/themed";
 import { LinearGradient } from "expo-linear-gradient";
-import { ArrowLeft, Heart, Play, Repeat, Shuffle, SkipBack, SkipForward, SpeakerLow } from "phosphor-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Heart, Play, Repeat, Shuffle, SkipBack, SkipForward } from "phosphor-react-native";
 import Carousel from "react-native-snap-carousel";
 import { musics } from "../utils/data";
 import { Dimensions, TouchableOpacity } from "react-native";
@@ -13,15 +12,15 @@ import { HeaderMusicSingle } from "../components/HeaderMusicSingle";
 
 interface Items {
     item: {
-      name: string;
-      author: string;
-      url: string;
-      isActive: boolean;
-      liked: boolean;
-      id: number;
+        name: string;
+        author: string;
+        url: string;
+        isActive: boolean;
+        liked: boolean;
+        id: number;
     };
-  }
-  
+}
+
 
 export function Music() {
     const [currrentSong, setCurrentSong] = useState({
